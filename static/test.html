@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHEP Player</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-mark">W2W</div>
+                <span class="logo-text">WHEP Player</span>
+            </div>
+            <span class="version">wowza2whep</span>
+        </header>
+
+        <main>
+            <section class="player-section">
+                <div class="video-wrapper" id="videoWrapper">
+                    <video id="video" autoplay muted playsinline controls></video>
+                    <div class="video-empty">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="2" y="4" width="20" height="16" rx="2"/>
+                            <path d="M10 9l5 3-5 3V9z"/>
+                        </svg>
+                        <span>No Signal</span>
+                    </div>
+                    <div class="signal-overlay" id="signalOverlay">
+                        <div class="signal-dot" id="signalDot"></div>
+                        <span id="signalText">STANDBY</span>
+                    </div>
+                </div>
+
+                <div class="url-bar">
+                    <input type="text" id="whepUrl" value="http://localhost:8080/whep/h264/live/stream" placeholder="http://host/whep/{codec}/{app}/{stream}">
+                    <button id="play">Play</button>
+                    <button id="stop" disabled>Stop</button>
+                </div>
+
+                <div class="waveform">
+                    <span class="waveform-label">Audio</span>
+                    <canvas id="waveform"></canvas>
+                </div>
+            </section>
+
+            <aside class="sidebar">
+                <div class="panel">
+                    <div class="panel-header">Status</div>
+                    <div class="status-panel" id="statusPanel">
+                        <div class="status-indicator"></div>
+                        <span class="status-text" id="statusText">Ready</span>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="statCodec">--</div>
+                            <div class="stat-label">Codec</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="statRes">--</div>
+                            <div class="stat-label">Resolution</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel log-panel">
+                    <div class="panel-header">Event Log</div>
+                    <div class="log-content" id="log"></div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <script src="whep-munge-sdp.js"></script>
+</body>
+</html>
